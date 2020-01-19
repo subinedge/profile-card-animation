@@ -1,0 +1,277 @@
+* {
+  outline: none;
+  user-select: none;
+}
+
+body {
+  margin: 0;
+  background: #24C6DC;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #514A9D, #24C6DC);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #514A9D, #24C6DC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+height: 100vh;
+  color: rgb(39, 37, 37);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.profile {
+  width: 330px;
+  height: 100px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+  background-color: #fafafa;
+  box-shadow: 0 0 2rem #babbbc;
+  animation: show-profile 0.5s forwards ease-in-out;
+}
+
+/* initially profile section should not be shown */
+
+@keyframes show-profile {
+  0% {
+    width: 0;
+  }
+}
+
+.profile .photo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #fafafa;
+  border: 5px solid #fafafa;
+  margin-left: -50px;
+  box-shadow: 0 0 0.5rem #babbbc;
+  animation: photo-rotate 0.5s forwards ease-in-out;
+}
+
+/* photo rotation  */
+
+@keyframes photo-rotate {
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+/* place the image perfectly */
+
+.profile .photo img {
+  width: 100%;
+}
+
+.profile .content, .profile .photo {
+  box-sizing: border-box;
+}
+
+.profile .content {
+  padding: 10px;
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.profile .content::before {
+  content: '';
+  position: absolute;
+  width: 230px;
+  height: 150px;
+  background-color: #e9f3e6;
+  left: 0;
+  top: -20px;
+  z-index: -1;
+  transform: rotate(-8deg);
+}
+
+.profile .content .text {
+  margin-top: 20px;
+  margin-left: 50px;
+}
+
+.profile .content .text h3, .profile .content .text h6 {
+  font-weight: 600;
+  margin: 3px 0;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+/* those extra height is because of padding and margin getting added to the total height.. to avoid this, we add border box to the content and the photo */
+
+/* style the button */
+
+.profile .content .btn {
+  background-color: #abc;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  position: absolute;
+  right: 25px;
+  top: 25px;
+  z-index: 1;
+  cursor: pointer;
+  transition-duration: 0.3s;
+  animation: pop-btn 0.3s both ease-in-out 0.5s;
+}
+
+/* animation for scaling button from 0 to 1 */
+
+@keyframes pop-btn {
+  0% {
+    transform: scale(0);
+  }
+
+  80% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.profile .content .btn:hover {
+  box-shadow: 0 0 0 5px rgba(170, 187, 204, 0.5);
+}
+
+.profile .content .btn span {
+  width: 60%;
+  height: 2px;
+  background-color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 20%;
+  transform: translateY(-50%);
+  animation: to-hamburger 0.3s forwards ease-in-out;
+}
+
+.profile .content .btn span::before, .profile .content .btn span::after {
+  content: '';
+  width: 100%;
+  height: 2px;
+  position: absolute;
+  background-color: #fff;
+  transition-duration: 0.3s;
+  transform: rotate(0deg);
+  right: 0;
+}
+
+.profile .content .btn span::before {
+  /* lets add margin to separate */
+  margin-top: -7px;
+}
+
+
+.profile .content .btn span::after {
+  /* lets add margin to separate */
+  margin-top: 7px;
+}
+
+.profile .content .btn.active span {
+  animation: to-arrow 0.3s forwards ease-in-out;
+}
+
+.profile .content .btn.active span::before, .profile .content .btn.active span::after {
+  width: 60%;
+  right: -1px;
+}
+
+.profile .content .btn.active span::before {
+  transform: rotate(45deg);
+}
+
+.profile .content .btn.active span::after {
+  transform: rotate(-45deg);
+}
+
+@keyframes to-hamburger {
+  from {
+    transform: translateY(-50%) rotate(-180deg);
+  }
+}
+
+@keyframes to-arrow {
+  from {
+    transform: translateY(-50%) rotate(0deg);
+  }
+
+  to {
+    transform: translateY(-50%) rotate(180deg);
+  }
+}
+
+.profile .box {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.7);
+  position: absolute;
+  top: 50%;
+  right: -40%;
+  transform: translate(-50%, -50%);
+  transition-duration: 0.3s;
+  opacity: 0;
+}
+
+.profile .box i {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #ececec;
+  font-size: 26px;
+  text-align: center;
+  line-height: 50px;
+  position: absolute;
+  left: 18px;
+  top: 50px;
+  box-shadow: 0 0 0.5rem #babbbc;
+  transition-duration: 0.3s;
+}
+
+.profile .box i:hover {
+  transition-delay: initial !important;
+  box-shadow: 0 0 0 5px #babbbc;
+}
+
+/* now align the icons radially 45deg apart when clicked on hamburger icon....
+lets add open class on click hamburger
+*/
+
+.profile .box.open {
+  opacity: 1;
+}
+
+.profile .box.open i {
+  left: 60px;
+}
+
+.profile .box.open i:nth-of-type(1) {
+  transform: rotate(-90deg) translateX(120px) rotate(90deg);
+  transition-delay: 0s;
+}
+
+.profile .box.open i:nth-of-type(2) {
+  transform: rotate(-45deg) translateX(120px) rotate(45deg);
+  transition-delay: 0.1s;
+}
+
+/* the icons are not coming outside the content box */
+
+.profile .box.open i:nth-of-type(3) {
+  transform: rotate(0deg) translateX(120px) rotate(0deg);
+  transition-delay: 0.2s;
+}
+
+.profile .box.open i:nth-of-type(4) {
+  transform: rotate(45deg) translateX(120px) rotate(-45deg);
+  transition-delay: 0.3s;
+}
+
+.profile .box.open i:nth-of-type(5) {
+  transform: rotate(90deg) translateX(120px) rotate(-90deg);
+  transition-delay: 0.4s;
+}
+
+/* add active class and flip the hamburger icon to left arrow like shape */
